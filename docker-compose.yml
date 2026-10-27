@@ -1,0 +1,30 @@
+﻿version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: portfolio-backend
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: portfolio-frontend
+    environment:
+      - NODE_ENV=production
+      - NUXT_HOST=0.0.0.0
+      - NUXT_PORT=5000
+      # If frontend needs to call backend, set NUXT_PUBLIC_API_BASE or adjust config
+    ports:
+      - "5000:5000"
+    depends_on:
+      - backend
+    restart: unless-stopped
