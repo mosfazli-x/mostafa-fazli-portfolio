@@ -1,0 +1,37 @@
+/* Colour tokens — override to re-skin the effect:
+   --ink    main text colour (defaults to currentColor)
+   --ink-2  primary accent   --ink-3  secondary accent */
+:root {
+  --ink: currentColor;
+  --ink-2: #FF4FD8;
+  --ink-3: #4FF8FF;
+}
+
+/* Cipher — scrambled characters decode into "Hi, I'm Mostafa", then re-encrypt */
+.fx-decoder {
+  font: 600 28px/1.2 "JetBrains Mono", monospace;
+  letter-spacing: .08em;
+  color: var(--ink-3);
+}
+
+.fx-decoder::after {
+  content: "▓#7@M$T";
+  animation: fx-decoder 4s steps(1) infinite;
+}
+
+@keyframes fx-decoder {
+  0%   { content: "▓#7@M$T"; color: var(--ink-3); }
+  8%   { content: "H!# @M$T"; }
+  16%  { content: "Hi, @M$T"; }
+  24%  { content: "Hi, I'm"; }
+  32%  { content: "Hi, I'm M"; }
+  40%  { content: "Hi, I'm Mo"; }
+  48%  { content: "Hi, I'm Most"; }
+  56%  { content: "Hi, I'm Mosta"; }
+  64%, 82% {
+    content: "Hi, I'm Mostafa";
+    color: var(--ink);
+  }
+  88%  { content: "H!, I'm M0st4f4"; color: var(--ink-3); }
+  94%  { content: "▓#7@M$T"; }
+}
